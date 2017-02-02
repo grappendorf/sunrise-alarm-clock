@@ -1,0 +1,18 @@
+# App artifacts
+/_build
+/db
+/deps
+/*.ez
+
+# Nerves images
+/_images
+
+# Generate on crash by the VM
+erl_crash.dump
+
+# IntelliJ
+/.idea
+/sunrise-alarm-clock.iml
+
+# Local configuration files
+**/config/local.exs
