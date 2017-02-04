@@ -1,5 +1,5 @@
 defmodule Settings do
-  use GenServer
+  use ExActor.GenServer, export: :settings
 
   @default_values %{
     alarm_active: false,
@@ -10,29 +10,17 @@ defmodule Settings do
     time_zone: 1,
   }
 
-  def start_link do
-    GenServer.start_link __MODULE__, nil, name: :settings
-  end
-
-  def init _ do
+  defstart start_link do
     :ok = PersistentStorage.setup path: "/root/settings"
-    {:ok, %{}}
+    initial_state %{}
   end
 
-  def put key, value do
-    GenServer.cast :settings, {:put, key, value}
-  end
-
-  def get key do
-    GenServer.call :settings, {:get, key}
-  end
-
-  def handle_cast {:put, key, value}, state do
+  defcast put(key, value) do
     PersistentStorage.put key, value
-    {:noreply, state}
+    noreply()
   end
 
-  def handle_call {:get, key}, _, state do
-    {:reply, PersistentStorage.get(key, @default_values[key]), state}
+  defcall get(key) do
+    reply PersistentStorage.get(key, @default_values[key])
   end
 end

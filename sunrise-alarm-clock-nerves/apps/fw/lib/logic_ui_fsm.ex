@@ -239,7 +239,7 @@ defmodule LogicUiFsm do
       Lcd.clear
       Lcd.print " Sunrise Alarm  "
       Lcd.goto 0, 1
-      Lcd.print " Version 0.0.1  "
+      Lcd.print " Version 0.1.0  "
     end
 
     event button_1 do
