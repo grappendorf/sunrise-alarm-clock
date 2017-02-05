@@ -21,14 +21,16 @@ config :nerves_ntp, :servers, [
 ]
 
 config :fw, :misc,
-  display_timeout: 30
+  display_timeout: 30,
+  start_children: true,
+  version: "0.2.0"
 
 config :fw, :buttons,
   button_1_pin: 12,
   button_2_pin: 16,
   button_3_pin: 20,
   button_4_pin: 21,
-  button_debounce_interval: 150
+  button_debounce_interval: 200
 
 config :fw, :touch,
   interrupt_pin: 26

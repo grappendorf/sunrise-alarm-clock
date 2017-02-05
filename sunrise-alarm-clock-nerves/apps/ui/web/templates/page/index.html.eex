@@ -18,8 +18,8 @@
     </div>
 
     <div class="col-lg-6">
-      <h4>Dimmer Advance</h4>
-      <%= select f, :dimmer_advance,
+      <h4>Sunrise Duration</h4>
+      <%= select f, :sunrise_duration,
       ["15 minutes": 15, "30 minutes": 30, "45 minutes": 45, "60 minutes": 60] %>
     </div>
   </div>

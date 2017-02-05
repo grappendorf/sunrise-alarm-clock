@@ -5,7 +5,7 @@ defmodule Settings do
     alarm_active: false,
     alarm_hour: 0,
     alarm_minute: 0,
-    dimmer_advance: 15,
+    sunrise_duration: 15,
     max_brightness: 0,
     time_zone: 1,
   }

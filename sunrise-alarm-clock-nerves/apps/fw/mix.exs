@@ -21,9 +21,8 @@ defmodule Fw.Mixfile do
   end
 
   def application do
-    [
-      mod: {Fw, []},
-      applications: [
+    applications = case Application.get_env(:fw, :misc)[:start_children] do
+      true -> [
         :logger,
         :elixir_ale,
         :nerves_interim_wifi,
@@ -36,6 +35,14 @@ defmodule Fw.Mixfile do
         :fsm,
         :ui
       ]
+      false -> [
+        :logger,
+        :timex
+      ]
+     end
+    [
+      mod: {Fw, []},
+      applications: applications
     ]
   end
 
@@ -51,7 +58,7 @@ defmodule Fw.Mixfile do
       {:exprintf, "~> 0.2.0"},
       {:timex, "~> 3.1.8"},
       {:fsm, git: "https://github.com/grappendorf/fsm.git", branch: "master"},
-      {:persistent_storage, git: "https://github.com/cellulose/persistent_storage.git", branch: "master"},
+      {:persistent_storage, git: "https://github.com/grappendorf/persistent_storage.git", branch: "master"},
       {:espec, "1.2.2", only: :test},
       {:ui, in_umbrella: true}
     ]

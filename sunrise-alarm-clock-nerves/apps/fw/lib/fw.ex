@@ -4,20 +4,21 @@ defmodule Fw do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    children = [
-      worker(Lcd, []),
-      worker(Leds, []),
-      worker(Nerves.InterimWiFi, [:wlan0, Application.get_env(:fw, :wlan)], function: :setup),
-      worker(Nerves.Networking, [:wlan0], function: :setup),
-      worker(Nerves.Ntp.Worker, []),
-      worker(Buttons, []),
-      worker(Touch, []),
-      worker(Settings, []),
-      worker(LogicAlarm, []),
-      worker(LogicUi, [])
-    ]
+    children = case Application.get_env(:fw, :misc)[:start_children] do
+       true -> [
+         worker(Lcd, []),
+         worker(Leds, []),
+         worker(Nerves.InterimWiFi, [:wlan0, Application.get_env(:fw, :wlan)], function: :setup),
+         worker(Nerves.Networking, [:wlan0], function: :setup),
+         worker(Nerves.Ntp.Worker, []),
+         worker(Buttons, [&Logic.dispatch/1]),
+         worker(Touch, [&Logic.dispatch/1]),
+         worker(Settings, []),
+         worker(Logic, [])
+       ]
+      false -> []
+    end
 
-    {:ok, _} = Supervisor.start_link children,
-      strategy: :one_for_one, name: Fw.Supervisor
+    {:ok, _} = Supervisor.start_link children, strategy: :one_for_one, name: Fw.Supervisor
   end
 end
