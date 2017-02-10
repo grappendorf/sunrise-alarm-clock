@@ -28,11 +28,11 @@ defmodule LogicUiReducers do
   end
 
   def reduce state = %{page: :alarm_hour}, {:button, 3} do
-    %{state | alarm_hour: state.alarm_hour |> Kernel.+(1) |> Kernel.rem(24)}
+    %{state | alarm_hour: state.alarm_hour |> Kernel.+(23) |> Kernel.rem(24)}
   end
 
   def reduce state = %{page: :alarm_hour}, {:button, 4} do
-    %{state | alarm_hour: state.alarm_hour |> Kernel.+(23) |> Kernel.rem(24)}
+    %{state | alarm_hour: state.alarm_hour |> Kernel.+(1) |> Kernel.rem(24)}
   end
 
   def reduce state = %{page: :alarm_minute}, {:button, 1} do
@@ -40,11 +40,11 @@ defmodule LogicUiReducers do
   end
 
   def reduce state = %{page: :alarm_minute}, {:button, 3} do
-    %{state | alarm_minute: state.alarm_minute |> Kernel.+(1) |> Kernel.rem(60)}
+    %{state | alarm_minute: state.alarm_minute |> Kernel.+(59) |> Kernel.rem(60)}
   end
 
   def reduce state = %{page: :alarm_minute}, {:button, 4} do
-    %{state | alarm_minute: state.alarm_minute |> Kernel.+(59) |> Kernel.rem(60)}
+    %{state | alarm_minute: state.alarm_minute |> Kernel.+(1) |> Kernel.rem(60)}
   end
 
   def reduce state = %{page: :sunrise_duration}, {:button, 1} do
@@ -52,11 +52,11 @@ defmodule LogicUiReducers do
   end
 
   def reduce state = %{page: :sunrise_duration}, {:button, 3} do
-    %{state | sunrise_duration: state.sunrise_duration |> Kernel.+(15) |> Kernel.min(60)}
+    %{state | sunrise_duration: state.sunrise_duration |> Kernel.-(15) |> Kernel.max(15)}
   end
 
   def reduce state = %{page: :sunrise_duration}, {:button, 4} do
-    %{state | sunrise_duration: state.sunrise_duration |> Kernel.-(15) |> Kernel.max(15)}
+    %{state | sunrise_duration: state.sunrise_duration |> Kernel.+(15) |> Kernel.min(60)}
   end
 
   def reduce state = %{page: :max_brightness}, {:button, 1} do
@@ -64,11 +64,11 @@ defmodule LogicUiReducers do
   end
 
   def reduce state = %{page: :max_brightness}, {:button, 3} do
-    %{state | max_brightness: state.max_brightness |> Kernel.+(1) |> Kernel.min(15)}
+    %{state | max_brightness: state.max_brightness |> Kernel.-(1) |> Kernel.max(0)}
   end
 
   def reduce state = %{page: :max_brightness}, {:button, 4} do
-    %{state | max_brightness: state.max_brightness |> Kernel.-(1) |> Kernel.max(0)}
+    %{state | max_brightness: state.max_brightness |> Kernel.+(1) |> Kernel.min(15)}
   end
 
   def reduce state = %{page: :time_zone}, {:button, 1} do
@@ -76,11 +76,11 @@ defmodule LogicUiReducers do
   end
 
   def reduce state = %{page: :time_zone}, {:button, 3} do
-    %{state | time_zone: (state.time_zone |> Kernel.+(12) |> Kernel.rem(24)) |> Kernel.-(11)}
+    %{state | time_zone: (state.time_zone |> Kernel.+(34) |> Kernel.rem(24)) |> Kernel.-(11)}
   end
 
   def reduce state = %{page: :time_zone}, {:button, 4} do
-    %{state | time_zone: (state.time_zone |> Kernel.+(34) |> Kernel.rem(24)) |> Kernel.-(11)}
+    %{state | time_zone: (state.time_zone |> Kernel.+(12) |> Kernel.rem(24)) |> Kernel.-(11)}
   end
 
   def reduce state = %{page: :clock}, {:button, 2} do

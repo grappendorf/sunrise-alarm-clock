@@ -35,72 +35,72 @@ defmodule LogicUiReducersSpec do
 
   describe "button 3 and 4 set the alarm active value and stay on the alarm active page" do
     let state: %{page: :alarm_active, alarm_active: nil}
-    it do: expect(reduce().(%{state() | alarm_active: false}, {:button, 3})). to eq(%{state() | alarm_active: true})
-    it do: expect(reduce().(%{state() | alarm_active: true}, {:button, 3})). to eq(%{state() | alarm_active: false})
     it do: expect(reduce().(%{state() | alarm_active: false}, {:button, 4})). to eq(%{state() | alarm_active: true})
     it do: expect(reduce().(%{state() | alarm_active: true}, {:button, 4})). to eq(%{state() | alarm_active: false})
+    it do: expect(reduce().(%{state() | alarm_active: false}, {:button, 3})). to eq(%{state() | alarm_active: true})
+    it do: expect(reduce().(%{state() | alarm_active: true}, {:button, 3})). to eq(%{state() | alarm_active: false})
   end
 
   describe "button 3 and 4 set the alarm hour value  and stay on the alarm hour page" do
     let state: %{page: :alarm_hour, alarm_hour: nil}
-    it do: expect(reduce().(%{state() | alarm_hour: 0}, {:button, 3})).to eq(%{state() | alarm_hour: 1})
-    it do: expect(reduce().(%{state() | alarm_hour: 12}, {:button, 3})).to eq(%{state() | alarm_hour: 13})
-    it do: expect(reduce().(%{state() | alarm_hour: 23}, {:button, 3})).to eq(%{state() | alarm_hour: 0})
-    it do: expect(reduce().(%{state() | alarm_hour: 0}, {:button, 4})).to eq(%{state() | alarm_hour: 23})
-    it do: expect(reduce().(%{state() | alarm_hour: 12}, {:button, 4})).to eq(%{state() | alarm_hour: 11})
-    it do: expect(reduce().(%{state() | alarm_hour: 23}, {:button, 4})).to eq(%{state() | alarm_hour: 22})
+    it do: expect(reduce().(%{state() | alarm_hour: 0}, {:button, 4})).to eq(%{state() | alarm_hour: 1})
+    it do: expect(reduce().(%{state() | alarm_hour: 12}, {:button, 4})).to eq(%{state() | alarm_hour: 13})
+    it do: expect(reduce().(%{state() | alarm_hour: 23}, {:button, 4})).to eq(%{state() | alarm_hour: 0})
+    it do: expect(reduce().(%{state() | alarm_hour: 0}, {:button, 3})).to eq(%{state() | alarm_hour: 23})
+    it do: expect(reduce().(%{state() | alarm_hour: 12}, {:button, 3})).to eq(%{state() | alarm_hour: 11})
+    it do: expect(reduce().(%{state() | alarm_hour: 23}, {:button, 3})).to eq(%{state() | alarm_hour: 22})
   end
 
   describe "button 3 and 4 set the alarm minute value and stay on the alarm minute page" do
     let state: %{page: :alarm_minute, alarm_minute: nil}
-    it do: expect(reduce().(%{state() | alarm_minute: 0}, {:button, 3})).to eq(%{state() | alarm_minute: 1})
-    it do: expect(reduce().(%{state() | alarm_minute: 30}, {:button, 3})).to eq(%{state() | alarm_minute: 31})
-    it do: expect(reduce().(%{state() | alarm_minute: 59}, {:button, 3})).to eq(%{state() | alarm_minute: 0})
-    it do: expect(reduce().(%{state() | alarm_minute: 0}, {:button, 4})).to eq(%{state() | alarm_minute: 59})
-    it do: expect(reduce().(%{state() | alarm_minute: 30}, {:button, 4})).to eq(%{state() | alarm_minute: 29})
-    it do: expect(reduce().(%{state() | alarm_minute: 59}, {:button, 4})).to eq(%{state() | alarm_minute: 58})
+    it do: expect(reduce().(%{state() | alarm_minute: 0}, {:button, 4})).to eq(%{state() | alarm_minute: 1})
+    it do: expect(reduce().(%{state() | alarm_minute: 30}, {:button, 4})).to eq(%{state() | alarm_minute: 31})
+    it do: expect(reduce().(%{state() | alarm_minute: 59}, {:button, 4})).to eq(%{state() | alarm_minute: 0})
+    it do: expect(reduce().(%{state() | alarm_minute: 0}, {:button, 3})).to eq(%{state() | alarm_minute: 59})
+    it do: expect(reduce().(%{state() | alarm_minute: 30}, {:button, 3})).to eq(%{state() | alarm_minute: 29})
+    it do: expect(reduce().(%{state() | alarm_minute: 59}, {:button, 3})).to eq(%{state() | alarm_minute: 58})
   end
 
   describe "button 3 and 4 set the sunrise duration value and stay on the sunrise duration page" do
     let state: %{page: :sunrise_duration, sunrise_duration: nil}
-    it do: expect(reduce().(%{state() | sunrise_duration: 15}, {:button, 3})).to eq(%{state() | sunrise_duration: 30})
-    it do: expect(reduce().(%{state() | sunrise_duration: 30}, {:button, 3})).to eq(%{state() | sunrise_duration: 45})
-    it do: expect(reduce().(%{state() | sunrise_duration: 45}, {:button, 3})).to eq(%{state() | sunrise_duration: 60})
-    it do: expect(reduce().(%{state() | sunrise_duration: 60}, {:button, 3})).to eq(%{state() | sunrise_duration: 60})
-    it do: expect(reduce().(%{state() | sunrise_duration: 15}, {:button, 4})).to eq(%{state() | sunrise_duration: 15})
-    it do: expect(reduce().(%{state() | sunrise_duration: 30}, {:button, 4})).to eq(%{state() | sunrise_duration: 15})
-    it do: expect(reduce().(%{state() | sunrise_duration: 45}, {:button, 4})).to eq(%{state() | sunrise_duration: 30})
-    it do: expect(reduce().(%{state() | sunrise_duration: 60}, {:button, 4})).to eq(%{state() | sunrise_duration: 45})
+    it do: expect(reduce().(%{state() | sunrise_duration: 15}, {:button, 4})).to eq(%{state() | sunrise_duration: 30})
+    it do: expect(reduce().(%{state() | sunrise_duration: 30}, {:button, 4})).to eq(%{state() | sunrise_duration: 45})
+    it do: expect(reduce().(%{state() | sunrise_duration: 45}, {:button, 4})).to eq(%{state() | sunrise_duration: 60})
+    it do: expect(reduce().(%{state() | sunrise_duration: 60}, {:button, 4})).to eq(%{state() | sunrise_duration: 60})
+    it do: expect(reduce().(%{state() | sunrise_duration: 15}, {:button, 3})).to eq(%{state() | sunrise_duration: 15})
+    it do: expect(reduce().(%{state() | sunrise_duration: 30}, {:button, 3})).to eq(%{state() | sunrise_duration: 15})
+    it do: expect(reduce().(%{state() | sunrise_duration: 45}, {:button, 3})).to eq(%{state() | sunrise_duration: 30})
+    it do: expect(reduce().(%{state() | sunrise_duration: 60}, {:button, 3})).to eq(%{state() | sunrise_duration: 45})
   end
 
   describe "button 3 and 4 set the max brightness value and stay on the max brightness page" do
     let state: %{page: :max_brightness, max_brightness: nil}
-    it do: expect(reduce().(%{state() | max_brightness: 0}, {:button, 3})).to eq(%{state() | max_brightness: 1})
-    it do: expect(reduce().(%{state() | max_brightness: 1}, {:button, 3})).to eq(%{state() | max_brightness: 2})
-    it do: expect(reduce().(%{state() | max_brightness: 7}, {:button, 3})).to eq(%{state() | max_brightness: 8})
-    it do: expect(reduce().(%{state() | max_brightness: 14}, {:button, 3})).to eq(%{state() | max_brightness: 15})
-    it do: expect(reduce().(%{state() | max_brightness: 15}, {:button, 3})).to eq(%{state() | max_brightness: 15})
-    it do: expect(reduce().(%{state() | max_brightness: 0}, {:button, 4})).to eq(%{state() | max_brightness: 0})
-    it do: expect(reduce().(%{state() | max_brightness: 1}, {:button, 4})).to eq(%{state() | max_brightness: 0})
-    it do: expect(reduce().(%{state() | max_brightness: 8}, {:button, 4})).to eq(%{state() | max_brightness: 7})
-    it do: expect(reduce().(%{state() | max_brightness: 14}, {:button, 4})).to eq(%{state() | max_brightness: 13})
-    it do: expect(reduce().(%{state() | max_brightness: 15}, {:button, 4})).to eq(%{state() | max_brightness: 14})
+    it do: expect(reduce().(%{state() | max_brightness: 0}, {:button, 4})).to eq(%{state() | max_brightness: 1})
+    it do: expect(reduce().(%{state() | max_brightness: 1}, {:button, 4})).to eq(%{state() | max_brightness: 2})
+    it do: expect(reduce().(%{state() | max_brightness: 7}, {:button, 4})).to eq(%{state() | max_brightness: 8})
+    it do: expect(reduce().(%{state() | max_brightness: 14}, {:button, 4})).to eq(%{state() | max_brightness: 15})
+    it do: expect(reduce().(%{state() | max_brightness: 15}, {:button, 4})).to eq(%{state() | max_brightness: 15})
+    it do: expect(reduce().(%{state() | max_brightness: 0}, {:button, 3})).to eq(%{state() | max_brightness: 0})
+    it do: expect(reduce().(%{state() | max_brightness: 1}, {:button, 3})).to eq(%{state() | max_brightness: 0})
+    it do: expect(reduce().(%{state() | max_brightness: 8}, {:button, 3})).to eq(%{state() | max_brightness: 7})
+    it do: expect(reduce().(%{state() | max_brightness: 14}, {:button, 3})).to eq(%{state() | max_brightness: 13})
+    it do: expect(reduce().(%{state() | max_brightness: 15}, {:button, 3})).to eq(%{state() | max_brightness: 14})
   end
 
   describe "button 3 and 4 set the time zone value and stay on the time zone page" do
     let state: %{page: :time_zone, time_zone: nil}
-    it do: expect(reduce().(%{state() | time_zone: -11}, {:button, 3})).to eq(%{state() | time_zone: -10})
-    it do: expect(reduce().(%{state() | time_zone: -10}, {:button, 3})).to eq(%{state() | time_zone: -9})
-    it do: expect(reduce().(%{state() | time_zone: -1}, {:button, 3})).to eq(%{state() | time_zone: 0})
-    it do: expect(reduce().(%{state() | time_zone: 0}, {:button, 3})).to eq(%{state() | time_zone: 1})
-    it do: expect(reduce().(%{state() | time_zone: 11}, {:button, 3})).to eq(%{state() | time_zone: 12})
-    it do: expect(reduce().(%{state() | time_zone: 12}, {:button, 3})).to eq(%{state() | time_zone: -11})
-    it do: expect(reduce().(%{state() | time_zone: -11}, {:button, 4})).to eq(%{state() | time_zone: 12})
-    it do: expect(reduce().(%{state() | time_zone: -9}, {:button, 4})).to eq(%{state() | time_zone: -10})
-    it do: expect(reduce().(%{state() | time_zone: 0}, {:button, 4})).to eq(%{state() | time_zone: -1})
-    it do: expect(reduce().(%{state() | time_zone: 1}, {:button, 4})).to eq(%{state() | time_zone: 0})
-    it do: expect(reduce().(%{state() | time_zone: 11}, {:button, 4})).to eq(%{state() | time_zone: 10})
-    it do: expect(reduce().(%{state() | time_zone: 12}, {:button, 4})).to eq(%{state() | time_zone: 11})
+    it do: expect(reduce().(%{state() | time_zone: -11}, {:button, 4})).to eq(%{state() | time_zone: -10})
+    it do: expect(reduce().(%{state() | time_zone: -10}, {:button, 4})).to eq(%{state() | time_zone: -9})
+    it do: expect(reduce().(%{state() | time_zone: -1}, {:button, 4})).to eq(%{state() | time_zone: 0})
+    it do: expect(reduce().(%{state() | time_zone: 0}, {:button, 4})).to eq(%{state() | time_zone: 1})
+    it do: expect(reduce().(%{state() | time_zone: 11}, {:button, 4})).to eq(%{state() | time_zone: 12})
+    it do: expect(reduce().(%{state() | time_zone: 12}, {:button, 4})).to eq(%{state() | time_zone: -11})
+    it do: expect(reduce().(%{state() | time_zone: -11}, {:button, 3})).to eq(%{state() | time_zone: 12})
+    it do: expect(reduce().(%{state() | time_zone: -9}, {:button, 3})).to eq(%{state() | time_zone: -10})
+    it do: expect(reduce().(%{state() | time_zone: 0}, {:button, 3})).to eq(%{state() | time_zone: -1})
+    it do: expect(reduce().(%{state() | time_zone: 1}, {:button, 3})).to eq(%{state() | time_zone: 0})
+    it do: expect(reduce().(%{state() | time_zone: 11}, {:button, 3})).to eq(%{state() | time_zone: 10})
+    it do: expect(reduce().(%{state() | time_zone: 12}, {:button, 3})).to eq(%{state() | time_zone: 11})
   end
 
   describe "clock tick activates the clock page and switches backlight on after boot" do
