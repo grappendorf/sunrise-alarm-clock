@@ -5,18 +5,19 @@ defmodule Store do
     %Store{
       state: initial_state,
       reducers: List.flatten(reducers),
-      subscribers: List.flatten(subscribers)
-    }
+      subscribers: List.flatten(subscribers)}
   end
 
   def state(store), do: store.state
 
   def reduce store, reducers do
-    %Store{store | reducers: List.flatten (store.reducers ++ [reducers]) }
+    reducers = store.reducers |> Kernel.++([reducers]) |> List.flatten |> Enum.uniq
+    %Store{store | reducers: reducers}
   end
 
   def subscribe store, subscribers do
-   %Store{store | subscribers: List.flatten (store.subscribers ++ [subscribers])}
+    subscribers = store.subscribers |> Kernel.++([subscribers]) |> List.flatten |> Enum.uniq
+    %Store{store | subscribers: subscribers}
   end
 
   def dispatch store, action do
