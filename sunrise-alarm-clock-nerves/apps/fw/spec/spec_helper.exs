@@ -4,6 +4,13 @@ defmodule StoreHelpers do
   def dispatch(store), do: store |> Store.dispatch(:action)
 end
 
+defmodule ExActorHelpers do
+  def start_link! module, params \\ [] do
+    {:ok, pid} = apply module, :start_link, params
+    pid
+  end
+end
+
 defmodule WaitHelpers do
   @default_timeout 1 * 1000
 

@@ -1,5 +1,6 @@
 defmodule ButtonsSpec do
   use ESpec
+  import ExActorHelpers
 
   @button_pin_1 Application.get_env(:fw, :buttons)[:button_1_pin]
   @button_pin_2 Application.get_env(:fw, :buttons)[:button_2_pin]
@@ -11,7 +12,7 @@ defmodule ButtonsSpec do
     def dispatch(_), do: nil
   end
 
-  let :buttons, do: ({:ok, pid} = Buttons.start_link &Dispatcher.dispatch/1; pid)
+  let :buttons, do: start_link! Buttons, [&Dispatcher.dispatch/1]
 
   before do
     allow Gpio |> to(accept :start_link, fn button, _ -> {:ok, button} end)

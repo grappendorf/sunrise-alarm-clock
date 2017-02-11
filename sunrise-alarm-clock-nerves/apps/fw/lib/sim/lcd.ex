@@ -55,7 +55,7 @@ defmodule Sim.Lcd do
   end
 
   defp empty_lines do
-    for _line <- 1..2 do " "|>String.duplicate(16) end
+    for _line <- 1..2 do " " |> String.duplicate(16) end
   end
 
   defp update_lines state, text do
