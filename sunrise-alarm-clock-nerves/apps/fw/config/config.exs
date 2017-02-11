@@ -22,7 +22,7 @@ config :nerves_ntp, :servers, [
 config :fw, :misc,
   display_timeout: 30,
   start_children: true,
-  version: "0.2.0"
+  version: "0.2.1"
 
 config :fw, :buttons,
   button_1_pin: 12,

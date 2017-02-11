@@ -4,12 +4,8 @@ defmodule Ui do
   def start(_type, _args) do
     import Supervisor.Spec
 
-    children = case Application.get_env(:fw, :misc)[:start_children] do
-      true -> [
-        supervisor(Ui.Endpoint, []),
-      ]
-      false -> []
-    end
+    children = [
+      supervisor(Ui.Endpoint, [])]
 
     opts = [strategy: :one_for_one, name: Ui.Supervisor]
     Supervisor.start_link(children, opts)

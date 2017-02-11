@@ -1,6 +1,11 @@
 use Mix.Config
 
 config :fw, :misc,
-  start_children: false
+  env: :test
 
-config :logger, level: :debug
+config :logger,
+  level: :warn
+
+config :ui, Ui.Endpoint,
+  http: [port: 4001],
+  server: false

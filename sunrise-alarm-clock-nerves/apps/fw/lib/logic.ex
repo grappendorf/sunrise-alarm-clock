@@ -11,6 +11,10 @@ defmodule Logic do
     initial_state state
   end
 
+  defcall state, state: state do
+    reply state.store.state
+  end
+
   defcast dispatch(action = {:button, _}), state: state = %{store: store} do
     new_store = store |> Store.dispatch({:backlight, :on}) |> Store.dispatch(action)
     new_state state |> schedule_idle_timeout |> Map.put(:store, new_store)
@@ -26,6 +30,10 @@ defmodule Logic do
     new_state state |> Map.put(:store, new_store)
   end
 
+  defcast subscribe(subscriber), state: state = %{store: store} do
+    new_state %{state | store: Store.subscribe(store, subscriber)}
+  end
+
   defhandleinfo :clock_tick, state: state = %{store: store} do
     new_store = Store.dispatch store, :clock_tick
     new_state state |> schedule_clock_tick |> Map.put(:store, new_store)
@@ -36,7 +44,7 @@ defmodule Logic do
     new_state state |> schedule_alarm_check |> Map.put(:store, new_store)
   end
 
-  def handle_info :idle_timeout, state = %{store: store} do
+  defhandleinfo :idle_timeout, state: state = %{store: store} do
     new_store = Store.dispatch store, {:backlight, :off}
     new_state state |> Map.put(:store, new_store) |> Map.put(:idle_timer, nil)
   end
@@ -54,8 +62,7 @@ defmodule Logic do
       time: Timex.now(Settings.get :time_zone),
       brightness: 0,
       brightness_delta: 0,
-      backlight: :off
-    }
+      backlight: :off}
   end
 
   defp add_store_reducers store do
@@ -77,8 +84,7 @@ defmodule Logic do
   defp create_state store do
     %{
       store: store,
-      idle_timer: nil
-    }
+      idle_timer: nil}
   end
 
   defp init_schedules state do

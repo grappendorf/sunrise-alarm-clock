@@ -1,0 +1,53 @@
+<section id="sim" class="sim">
+  <div id="lcd" class="lcd <%= backlight_class(@leds) %>">
+    <%= for {line, i} <- (@lcd.chars |> Enum.with_index) do %>
+      <div id="line-<%= i %>" class="line"><%= line %></div>
+    <% end %>
+  </div>
+
+  <div id="alarmlight" class="alarmlight">☀</div>
+
+  <div class="buttons">
+    <%= for num <- 1..4 do %>
+      <a class="button" href="#" onclick="button_press(<%= num %>);"><%= num %></a>
+    <% end %>
+    <a class="touch" href="#" onclick="touch();">Touch</a>
+  </div>
+
+  <div class="logic">
+    <pre><code id="storeState" class="language-json"></code></pre>
+  </div>
+</section>
+
+<script type="application/javascript">
+  button_press = function(num) {
+    window.channel.push("button_pressed", {num: num});
+  };
+
+  touch = function() {
+    window.channel.push("touched");
+  };
+
+  $(function() {
+    window.channel.on("sim_changed", function(msg) {
+      msg.lcd.chars.forEach(function(line, i) {
+        if ((msg.lcd.cursor == 'on' || msg.lcd.cursor == 'blink') &&
+            msg.leds.backlight == 'on' && msg.lcd.y == i){
+          line = line.substr(0, msg.lcd.x) + '<span class="cursor">' +
+            line[msg.lcd.x] + '</span>' + line.substr(msg.lcd.x + 1);
+        }
+        $('#line-' + i).html(line);
+      });
+      $('#lcd').toggleClass("backlight", msg.leds.backlight == "on");
+      $('#alarmlight').css('color', 'rgb(' + msg.leds.light + ',' + msg.leds.light + ',0)');
+    });
+
+    window.channel.on("store_changed", function(msg) {
+      $('#storeState').html(JSON.stringify(msg.state, undefined, 2));
+      Prism.highlightAll();
+    });
+
+    $('#storeState').html(JSON.stringify(<%= raw Poison.encode!(@logic) %>, undefined, 2));
+    Prism.highlightAll();
+  });
+</script>

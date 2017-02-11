@@ -21,8 +21,8 @@ defmodule Fw.Mixfile do
   end
 
   def application do
-    applications = case Application.get_env(:fw, :misc)[:start_children] do
-      true -> [
+    applications = case Application.get_env(:fw, :misc)[:env] do
+      :prod -> [
         :logger,
         :elixir_ale,
         :nerves_interim_wifi,
@@ -33,16 +33,20 @@ defmodule Fw.Mixfile do
         :timex,
         :persistent_storage,
         :fsm,
-        :ui
-      ]
-      false -> [
+        :ui]
+      :dev -> [
         :logger,
-        :timex
-      ]
-     end
+        :timex,
+        :ui]
+      :test -> [
+        :logger,
+        :timex,
+        :ui]
+    end
+
     [
-      mod: {Fw, []},
-      applications: applications
+      applications: applications,
+      mod: {Fw, []}
     ]
   end
 
