@@ -5,6 +5,7 @@ config :ui, Ui.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/manifest.json"
 
-config :logger, level: :info
+config :logger,
+  level: :info
 
 import_config "prod.secret.exs"

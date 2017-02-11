@@ -17,8 +17,7 @@ defmodule LogicAlarmReducersSpec do
     sunrise_duration: sunrise_duration(),
     max_brightness: 10,
     brightness: brightness(),
-    brightness_delta: brightness_delta()
-  }
+    brightness_delta: brightness_delta()}
 
   describe "clock tick activates sets alarm state to idle after boot" do
     let alarm: :boot

@@ -24,7 +24,6 @@ defmodule Ui.PageController do
       alarm_time: (({:ok, time} = Time.new(Settings.get(:alarm_hour), Settings.get(:alarm_minute), 0); time)),
       sunrise_duration: Settings.get(:sunrise_duration),
       max_brightness: Settings.get(:max_brightness),
-      time_zone: Settings.get(:time_zone)
-    }
+      time_zone: Settings.get(:time_zone)}
   end
 end

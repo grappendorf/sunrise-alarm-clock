@@ -7,8 +7,7 @@ defmodule Settings do
     alarm_minute: 0,
     sunrise_duration: 15,
     max_brightness: 0,
-    time_zone: 1,
-  }
+    time_zone: 1}
 
   defstart start_link do
     :ok = PersistentStorage.setup path: "/root/settings"

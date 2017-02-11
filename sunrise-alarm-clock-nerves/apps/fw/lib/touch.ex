@@ -23,8 +23,7 @@ defmodule Touch do
     initial_state %{
       action_dispatch: action_dispatch,
       i2c: i2c,
-      interrupt: interrupt
-    }
+      interrupt: interrupt}
   end
 
   defhandleinfo {:gpio_interrupt, @interrupt_pin, :falling},

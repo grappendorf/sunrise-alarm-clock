@@ -43,26 +43,8 @@ defmodule Lcd do
     GenServer.start_link __MODULE__, nil, name: :lcd
     {:ok, i2c} = I2c.start_link "i2c-1", @lcd_i2c_address
     lcd_init i2c
-    lcd_create_char i2c, 1, [
-      0b00100,
-    	0b01110,
-    	0b01110,
-    	0b01110,
-    	0b11111,
-    	0b11111,
-    	0b00100,
-    	0b00000
-    ]
-    lcd_create_char i2c, 2, [
-      0b10101,
-    	0b01110,
-    	0b01110,
-    	0b11111,
-    	0b01110,
-    	0b01110,
-    	0b10101,
-    	0b00000
-    ]
+    create_bell_char i2c
+    create_sun_char i2c
     lcd_clear i2c
     lcd_print i2c, " Sunrise Alarm  "
     lcd_goto i2c, 0, 1
@@ -198,5 +180,29 @@ defmodule Lcd do
 
   def format_time hour, minute do
     sprintf("%02d:%02d", [hour, minute])
+  end
+
+  defp create_bell_char i2c do
+    lcd_create_char i2c, 1, [
+      0b00100,
+    	0b01110,
+    	0b01110,
+    	0b01110,
+    	0b11111,
+    	0b11111,
+    	0b00100,
+    	0b00000]
+  end
+
+  defp create_sun_char i2c do
+    lcd_create_char i2c, 2, [
+      0b10101,
+    	0b01110,
+    	0b01110,
+    	0b11111,
+    	0b01110,
+    	0b01110,
+    	0b10101,
+    	0b00000]
   end
 end
