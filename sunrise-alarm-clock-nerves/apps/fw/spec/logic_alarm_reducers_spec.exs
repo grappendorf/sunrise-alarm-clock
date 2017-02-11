@@ -19,6 +19,10 @@ defmodule LogicAlarmReducersSpec do
     brightness: brightness(),
     brightness_delta: brightness_delta()}
 
+  defp time_at hour, minute, second do
+    Timex.now() |> Timex.set(hour: hour, minute: minute, second: second)
+  end
+
   describe "clock tick activates sets alarm state to idle after boot" do
     let alarm: :boot
     it do: expect(reduce().(state(), :clock_tick).alarm).to eq(:idle)
@@ -28,14 +32,14 @@ defmodule LogicAlarmReducersSpec do
     let alarm: :idle
 
     context "when the current time is before the sunrise time" do
-      let time: Timex.now() |> Timex.set(hour: 12, minute: 46, second: 0)
+      let time: time_at 12, 46, 0
       it "the alarm state should stay idle" do
         expect(reduce().(state(), :alarm_check).alarm).to eq(:idle)
       end
     end
 
     context "when the current time is after the sunrise time" do
-      let time: Timex.now() |> Timex.set(hour: 16, minute: 11, second: 0)
+      let time: time_at 16, 11, 0
       it "the alarm state should stay idle" do
         expect(reduce().(state(), :alarm_check).alarm).to eq(:idle)
       end
@@ -44,7 +48,7 @@ defmodule LogicAlarmReducersSpec do
     context "when the current time passed the sunrise time" do
       context "with no sunrise duration the sunrise time equals the alarm time" do
         let sunrise_duration: 0
-        let time: Timex.now() |> Timex.set(hour: 14, minute: 23, second: 1)
+        let time: time_at 14, 23, 1
         it "the alarm state should switch to sunrise" do
           expect(reduce().(state(), :alarm_check).alarm).to eq(:sunrise)
         end
@@ -52,7 +56,7 @@ defmodule LogicAlarmReducersSpec do
 
       context "with a sunrise duration the sunrise time is sunrise duration minutes before the alarm time" do
         let sunrise_duration: 10
-        let time: Timex.now() |> Timex.set(hour: 14, minute: 13, second: 1)
+        let time: time_at 14, 13, 1
         it "the alarm state should switch to sunrise" do
           expect(reduce().(state(), :alarm_check).alarm).to eq(:sunrise)
         end

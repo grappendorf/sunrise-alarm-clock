@@ -1,4 +1,4 @@
-<%= form_for @settings, "/", fn f -> %>
+<%= form_for @settings, "/", [id: "settings"], fn f -> %>
   <div class="row form">
     <div class="col-lg-6">
       <h4>Alarm Active</h4>
@@ -44,5 +44,32 @@
 <% end %>
 
 <script type="text/javascript">
-  $("input.slider").slider();
+  $(function() {
+    $("input.slider").slider();
+
+    window.channel.on("store_changed", function(msg) {
+      if (msg.state.alarm_active != msg.old_state.alarm_active) {
+        $('[name="settings[alarm_active]"]').val(msg.state.alarm_active ? 'true' : 'false');
+        $('[name="settings[alarm_active]"]').prop('checked', msg.state.alarm_active);
+      }
+      if (msg.state.alarm_hour != msg.old_state.alarm_hour) {
+        $('[name="settings[alarm_time][hour]"]').val(msg.state.alarm_hour);
+      }
+      if (msg.state.alarm_minute != msg.old_state.alarm_minute) {
+        $('[name="settings[alarm_time][minute]"]').val(msg.state.alarm_minute);
+      }
+      if (msg.state.time_zone != msg.old_state.time_zone) {
+        $('[name="settings[time_zone]"]').val(msg.state.time_zone);
+      }
+      if (msg.state.time_zone != msg.old_state.time_zone) {
+        $('[name="settings[time_zone]"]').val(msg.state.time_zone);
+      }
+      if (msg.state.sunrise_duration != msg.old_state.sunrise_duration) {
+        $('[name="settings[sunrise_duration]"]').val(msg.state.sunrise_duration);
+      }
+      if (msg.state.max_brightness != msg.old_state.max_brightness) {
+        $('[name="settings[max_brightness]"]').slider('setValue', msg.state.max_brightness);
+      }
+    });
+  });
 </script>
