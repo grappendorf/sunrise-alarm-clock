@@ -4,7 +4,7 @@ defmodule StoreHelpers do
   def dispatch(store), do: store |> Store.dispatch(:action)
 end
 
-defmodule WaitHelper do
+defmodule WaitHelpers do
   @default_timeout 1 * 1000
 
   def wait_until(fun), do: wait_until @default_timeout, fun
