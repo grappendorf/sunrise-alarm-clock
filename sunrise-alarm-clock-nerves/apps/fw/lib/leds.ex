@@ -10,11 +10,7 @@ defmodule Leds do
 
   defstart start_link do
     {:ok, i2c} = I2c.start_link "i2c-1", 0x60
-    I2c.write i2c, <<@pcs0_reg, 0x00>>
-    I2c.write i2c, <<@pwm0_reg, 0x00>>
-    I2c.write i2c, <<@pcs1_reg, 0x00>>
-    I2c.write i2c, <<@pwm1_reg, 0x00>>
-    I2c.write i2c, <<@ls0_reg, 0b00001101>>
+    init_controller i2c
     initial_state %{i2c: i2c}
   end
 
@@ -31,5 +27,13 @@ defmodule Leds do
   defcast light(value), state: %{i2c: i2c} do
     I2c.write i2c, <<@pwm1_reg, value>>
     noreply()
+  end
+
+  defp init_controller i2c do
+    I2c.write i2c, <<@pcs0_reg, 0x00>>
+    I2c.write i2c, <<@pwm0_reg, 0x00>>
+    I2c.write i2c, <<@pcs1_reg, 0x00>>
+    I2c.write i2c, <<@pwm1_reg, 0x00>>
+    I2c.write i2c, <<@ls0_reg, 0b00001101>>
   end
 end
