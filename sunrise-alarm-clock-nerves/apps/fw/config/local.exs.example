@@ -1,0 +1,8 @@
+use Mix.Config
+
+config :fw, :wlan,
+  ssid: "REPLACE WITH YOUR SSID",
+  psk: "REPLACE WITH YOUR PASSPHRASE"
+
+config :ui, Ui.Endpoint,
+  secret_key_base: "REPLACE WITH YOUR SECRET KEY BASE"
