@@ -1,0 +1,11 @@
+use Mix.Config
+
+config :nerves_network, :default,
+  wlan0: [
+    ssid: "REPLACE WITH YOUR SSID",
+    psk: "REPLACE WITH YOUR PASSPHRASE",
+    key_mgmt: "WPA-PSK"
+  ]
+
+config :ui, UiWeb.Endpoint,
+  secret_key_base: "REPLACE WITH YOUR SECRET KEY BASE 123456789012345678901234567890"
