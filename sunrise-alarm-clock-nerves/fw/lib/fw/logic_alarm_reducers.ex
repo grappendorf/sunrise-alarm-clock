@@ -30,6 +30,22 @@ defmodule Fw.LogicAlarmReducers do
     %{state | alarm: :idle, brightness: 0, brightness_delta: 0}
   end
 
+  def reduce state = %{alarm: :sunrise}, {:button, 3} do
+    %{state | alarm: :idle, brightness: 0, brightness_delta: 0}
+  end
+
+  def reduce state = %{alarm: :alarm}, {:button, 3} do
+    %{state | alarm: :idle, brightness: 0, brightness_delta: 0}
+  end
+
+  def reduce state = %{alarm: :sunrise}, {:button, 4} do
+    %{state | alarm: :idle, brightness: 0, brightness_delta: 0}
+  end
+
+  def reduce state = %{alarm: :alarm}, {:button, 4} do
+    %{state | alarm: :idle, brightness: 0, brightness_delta: 0}
+  end
+
   def reduce(state, _) do
     state
   end

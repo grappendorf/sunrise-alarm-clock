@@ -102,4 +102,18 @@ defmodule LogicAlarmReducersSpec do
       it do: expect(reduce().(state(), :touch).alarm).to eq(:idle)
     end
   end
+
+  describe "a button 3/4 press changes alarm state back to idle" do
+    context "when the alarm state is sunrise" do
+      let alarm: :sunrise
+      it do: expect(reduce().(state(), {:button, 3}).alarm).to eq(:idle)
+      it do: expect(reduce().(state(), {:button, 4}).alarm).to eq(:idle)
+    end
+
+    context "when the alarm state is alarm" do
+      let alarm: :alarm
+      it do: expect(reduce().(state(), {:button, 3}).alarm).to eq(:idle)
+      it do: expect(reduce().(state(), {:button, 4}).alarm).to eq(:idle)
+    end
+  end
 end
