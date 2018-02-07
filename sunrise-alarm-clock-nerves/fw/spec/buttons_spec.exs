@@ -19,6 +19,7 @@ defmodule ButtonsSpec do
   before do
     allow GPIO |> to(accept :start_link, fn button, _ -> {:ok, button} end)
     allow GPIO |> to(accept :set_int, fn _, _ -> nil end)
+    allow GPIO |> to(accept :read, fn _ -> 0 end)
     allow Dispatcher |> to(accept :dispatch)
   end
 
@@ -61,6 +62,7 @@ defmodule ButtonsSpec do
   describe "a button is debounced, the action is sent only once" do
     before do
       send buttons(), {:gpio_interrupt, @button_pin_1, :falling}
+      send buttons(), {:gpio_interrupt, @button_pin_1, :rising}
       send buttons(), {:gpio_interrupt, @button_pin_1, :falling}
       :timer.sleep 2 * @button_debounce_interval_ms
     end

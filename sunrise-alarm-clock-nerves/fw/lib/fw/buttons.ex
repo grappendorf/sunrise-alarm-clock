@@ -26,26 +26,26 @@ defmodule Fw.Buttons do
   end
 
   defhandleinfo {:gpio_interrupt, @button_1_pin, :falling},
-      state: %{action_dispatch: action_dispatch} do
-    debounce_then_call fn -> action_dispatch.({:button, 1}) end
+      state: %{action_dispatch: action_dispatch, button_1: button} do
+    debounce_then_call button, fn -> action_dispatch.({:button, 1}) end
     noreply()
   end
 
   defhandleinfo {:gpio_interrupt, @button_2_pin, :falling},
-      state: %{action_dispatch: action_dispatch} do
-    debounce_then_call fn -> action_dispatch.({:button, 2}) end
+      state: %{action_dispatch: action_dispatch, button_2: button} do
+    debounce_then_call button, fn -> action_dispatch.({:button, 2}) end
     noreply()
   end
 
   defhandleinfo {:gpio_interrupt, @button_3_pin, :falling},
-      state: %{action_dispatch: action_dispatch} do
-    debounce_then_call fn -> action_dispatch.({:button, 3}) end
+      state: %{action_dispatch: action_dispatch, button_3: button} do
+    debounce_then_call button, fn -> action_dispatch.({:button, 3}) end
     noreply()
   end
 
   defhandleinfo {:gpio_interrupt, @button_4_pin, :falling},
-      state: %{action_dispatch: action_dispatch} do
-    debounce_then_call fn -> action_dispatch.({:button, 4}) end
+      state: %{action_dispatch: action_dispatch, button_4: button} do
+    debounce_then_call button, fn -> action_dispatch.({:button, 4}) end
     noreply()
   end
 
@@ -53,12 +53,11 @@ defmodule Fw.Buttons do
     noreply()
   end
 
-  defp debounce_then_call func do
+  defp debounce_then_call button, func do
     receive do
       _ -> nil
     after
-      @button_debounce_interval_ms -> nil
+      @button_debounce_interval_ms -> if GPIO.read(button) == 0, do: func.()
     end
-    func.()
   end
 end

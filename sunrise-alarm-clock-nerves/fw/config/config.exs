@@ -56,7 +56,7 @@ config :fw, :buttons,
   button_2_pin: 16,
   button_3_pin: 20,
   button_4_pin: 21,
-  button_debounce_interval: 200
+  button_debounce_interval: 10
 
 config :fw, :touch,
   interrupt_pin: 26
