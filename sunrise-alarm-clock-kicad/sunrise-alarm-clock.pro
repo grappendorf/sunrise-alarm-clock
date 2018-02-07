@@ -1,4 +1,4 @@
-update=So 29 Jan 2017 22:55:34 CET
+update=Mi 07 Feb 2018 12:23:42 CET
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,6 +25,16 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=70
 [eeschema]
 version=1
 LibDir=/home/grappendorf/.kicad-library
@@ -60,15 +70,5 @@ LibName28=contrib
 LibName29=valves
 LibName30=raspberry_pi
 LibName31=OSHW
-LibName32=grapelabs
-LibName33=dc-dc
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=70
+LibName32=dc-dc
+LibName33=grappendorf

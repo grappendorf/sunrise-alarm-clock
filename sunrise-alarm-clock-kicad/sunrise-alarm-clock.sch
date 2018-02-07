@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:sunrise-alarm-clock-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,8 +31,8 @@ LIBS:contrib
 LIBS:valves
 LIBS:raspberry_pi
 LIBS:OSHW
-LIBS:grapelabs
 LIBS:dc-dc
+LIBS:grappendorf
 LIBS:sunrise-alarm-clock-cache
 EELAYER 25 0
 EELAYER END
@@ -853,7 +854,7 @@ Wire Wire Line
 Wire Wire Line
 	9650 5950 9650 6100
 $Comp
-L LED D1
+L LED-RESCUE-sunrise-alarm-clock D1
 U 1 1 588FC63A
 P 10450 4850
 F 0 "D1" H 10450 4950 50  0000 C CNN
@@ -989,7 +990,7 @@ Wire Wire Line
 Wire Wire Line
 	3400 1700 3450 1700
 $Comp
-L POT RV1
+L POT-RESCUE-sunrise-alarm-clock RV1
 U 1 1 588E766D
 P 10350 2850
 F 0 "RV1" H 10350 2770 50  0000 C CNN
