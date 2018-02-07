@@ -49,7 +49,7 @@ config :fw, :misc,
   display_timeout: 30,
   start_children: true,
   persistent_storage_dir: "/root/settings",
-  version: "0.3.0"
+  version: "0.3.1"
 
 config :fw, :buttons,
   button_1_pin: 12,
