@@ -70,11 +70,8 @@ config :fw, :lcd,
   line_2_start: 0x40,
   wrap: 0
 
-# Import target specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-# Uncomment to use target specific configurations
-#
-# import_config "#{Mix.Project.config[:target]}.exs"
-
+if File.exists? "config/#{Mix.Project.config[:target]}/config.exs" do
+  import_config "#{Mix.Project.config[:target]}/config.exs"
+end
 import_config "#{Mix.env}.exs"
 import_config "local.exs"

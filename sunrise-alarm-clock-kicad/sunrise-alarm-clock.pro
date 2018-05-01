@@ -1,4 +1,4 @@
-update=Mi 07 Feb 2018 12:23:42 CET
+update=Di 01 Mai 2018 11:45:20 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,19 +25,9 @@ version=1
 NetIExt=net
 [general]
 version=1
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=70
 [eeschema]
 version=1
-LibDir=/home/grappendorf/.kicad-library
+LibDir=
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -68,7 +58,17 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=raspberry_pi
-LibName31=OSHW
-LibName32=dc-dc
-LibName33=grappendorf
+LibName30=dc-dc
+LibName31=/home/grappendorf/kicad-libraries/grappendorf
+LibName32=/home/grappendorf/kicad-libraries/OSHW
+LibName33=/home/grappendorf/kicad-libraries/raspberry_pi
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=./
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=70

@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:sunrise-alarm-clock-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,10 +28,10 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:raspberry_pi
-LIBS:OSHW
 LIBS:dc-dc
 LIBS:grappendorf
+LIBS:OSHW
+LIBS:raspberry_pi
 LIBS:sunrise-alarm-clock-cache
 EELAYER 25 0
 EELAYER END
@@ -41,7 +40,7 @@ encoding utf-8
 Sheet 1 1
 Title "Sunrise Alarm Clock"
 Date "2017-01-29"
-Rev "1"
+Rev "2"
 Comp ""
 Comment1 ""
 Comment2 "CERN Open Hardware License 1.1"
@@ -123,17 +122,6 @@ F 1 "LCD16X2" H 9900 1850 50  0000 C CNN
 F 2 "WC1602A" H 9200 1400 50  0000 C CIN
 F 3 "" H 9200 1450 50  0000 C CNN
 	1    9200 1450
-	1    0    0    -1  
-$EndComp
-$Comp
-L CAP1293 U2
-U 1 1 588E5936
-P 5450 1850
-F 0 "U2" H 5100 2350 50  0000 L CNN
-F 1 "CAP1293" H 5550 2350 50  0000 L CNN
-F 2 "" H 5450 1850 50  0000 C CNN
-F 3 "" H 5450 1850 50  0000 C CNN
-	1    5450 1850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -366,34 +354,8 @@ F 3 "" H 4050 4200 50  0000 C CNN
 $EndComp
 Text GLabel 1400 3350 0    59   Input ~ 0
 TOUCH_INT
-Text GLabel 4800 2000 0    59   Input ~ 0
+Text GLabel 4950 1650 0    59   Input ~ 0
 TOUCH_INT
-$Comp
-L GND #PWR14
-U 1 1 588ED03D
-P 5450 2550
-F 0 "#PWR14" H 5450 2300 50  0001 C CNN
-F 1 "GND" H 5450 2400 50  0000 C CNN
-F 2 "" H 5450 2550 50  0000 C CNN
-F 3 "" H 5450 2550 50  0000 C CNN
-	1    5450 2550
-	1    0    0    -1  
-$EndComp
-$Comp
-L +5V #PWR13
-U 1 1 588ED108
-P 5450 1150
-F 0 "#PWR13" H 5450 1000 50  0001 C CNN
-F 1 "+5V" H 5450 1290 50  0000 C CNN
-F 2 "" H 5450 1150 50  0000 C CNN
-F 3 "" H 5450 1150 50  0000 C CNN
-	1    5450 1150
-	1    0    0    -1  
-$EndComp
-Text GLabel 4800 1600 0    59   Input ~ 0
-SCL
-Text GLabel 4800 1700 0    59   Input ~ 0
-SDA
 Text GLabel 5600 4950 0    59   Input ~ 0
 SCL
 Text GLabel 5600 5050 0    59   Input ~ 0
@@ -522,12 +484,12 @@ $EndComp
 $Comp
 L CONN_01X01 P2
 U 1 1 588F55B4
-P 6350 1600
-F 0 "P2" H 6350 1700 50  0000 C CNN
-F 1 "TOUCH" V 6450 1600 50  0000 C CNN
-F 2 "" H 6350 1600 50  0000 C CNN
-F 3 "" H 6350 1600 50  0000 C CNN
-	1    6350 1600
+P 6100 1650
+F 0 "P2" H 6100 1750 50  0000 C CNN
+F 1 "TOUCH" V 6200 1650 50  0000 C CNN
+F 2 "" H 6100 1650 50  0000 C CNN
+F 3 "" H 6100 1650 50  0000 C CNN
+	1    6100 1650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -593,7 +555,11 @@ Wire Wire Line
 Wire Wire Line
 	6900 2350 7050 2350
 Wire Wire Line
-	6900 2550 6900 3450
+	6900 2550 6900 2650
+Wire Wire Line
+	6900 2650 6900 2750
+Wire Wire Line
+	6900 2750 6900 3450
 Wire Wire Line
 	6900 2550 7050 2550
 Wire Wire Line
@@ -613,13 +579,21 @@ Wire Wire Line
 Wire Wire Line
 	1500 3450 1650 3450
 Wire Wire Line
-	1150 1750 1650 1750
+	1150 1750 1450 1750
 Wire Wire Line
-	1150 1650 1650 1650
+	1450 1750 1650 1750
 Wire Wire Line
-	2450 3050 3350 3050
+	1150 1650 1300 1650
 Wire Wire Line
-	2450 3250 3250 3250
+	1300 1650 1650 1650
+Wire Wire Line
+	2450 3050 3150 3050
+Wire Wire Line
+	3150 3050 3350 3050
+Wire Wire Line
+	2450 3250 3000 3250
+Wire Wire Line
+	3000 3250 3250 3250
 Wire Wire Line
 	3250 3250 3250 3350
 Wire Wire Line
@@ -631,7 +605,11 @@ Wire Wire Line
 Wire Wire Line
 	3150 3650 3350 3650
 Wire Wire Line
-	2450 3450 3050 3450
+	2450 3450 2700 3450
+Wire Wire Line
+	2700 3450 2850 3450
+Wire Wire Line
+	2850 3450 3050 3450
 Wire Wire Line
 	3050 3450 3050 3950
 Wire Wire Line
@@ -651,9 +629,15 @@ Connection ~ 2700 3450
 Wire Wire Line
 	2700 2650 2700 2550
 Wire Wire Line
-	2700 2550 3150 2550
+	2700 2550 2850 2550
 Wire Wire Line
-	3150 2400 3150 2650
+	2850 2550 3000 2550
+Wire Wire Line
+	3000 2550 3150 2550
+Wire Wire Line
+	3150 2400 3150 2550
+Wire Wire Line
+	3150 2550 3150 2650
 Wire Wire Line
 	3000 2650 3000 2550
 Connection ~ 3000 2550
@@ -662,7 +646,13 @@ Wire Wire Line
 Connection ~ 2850 2550
 Connection ~ 3150 2550
 Wire Wire Line
-	4050 3050 4050 4200
+	4050 3050 4050 3350
+Wire Wire Line
+	4050 3350 4050 3650
+Wire Wire Line
+	4050 3650 4050 3950
+Wire Wire Line
+	4050 3950 4050 4200
 Wire Wire Line
 	4050 3050 3950 3050
 Wire Wire Line
@@ -677,15 +667,7 @@ Connection ~ 4050 3950
 Wire Wire Line
 	1650 3350 1400 3350
 Wire Wire Line
-	4950 2000 4800 2000
-Wire Wire Line
-	5450 2450 5450 2550
-Wire Wire Line
-	4950 1600 4800 1600
-Wire Wire Line
-	4950 1700 4800 1700
-Wire Wire Line
-	5450 1150 5450 1250
+	5100 1650 4950 1650
 Wire Wire Line
 	5750 4950 5600 4950
 Wire Wire Line
@@ -701,7 +683,9 @@ Wire Wire Line
 	1450 1400 1450 1750
 Connection ~ 1450 1750
 Wire Wire Line
-	1300 900  1300 1100
+	1300 900  1300 1000
+Wire Wire Line
+	1300 1000 1300 1100
 Wire Wire Line
 	1450 1100 1450 1000
 Wire Wire Line
@@ -710,11 +694,15 @@ Connection ~ 1300 1000
 Wire Wire Line
 	3450 6050 3800 6050
 Wire Wire Line
-	3800 5650 3800 6250
+	3800 5650 3800 6050
+Wire Wire Line
+	3800 6050 3800 6250
 Wire Wire Line
 	1700 6250 1850 6250
 Wire Wire Line
-	1850 6150 1850 6750
+	1850 6150 1850 6250
+Wire Wire Line
+	1850 6250 1850 6750
 Wire Wire Line
 	2300 6550 2300 6750
 Wire Wire Line
@@ -722,13 +710,15 @@ Wire Wire Line
 Wire Wire Line
 	3800 6550 3800 6750
 Wire Wire Line
-	1700 6050 2650 6050
+	1700 6050 2300 6050
 Wire Wire Line
-	2300 5650 2300 6250
+	2300 6050 2650 6050
+Wire Wire Line
+	2300 5650 2300 6050
+Wire Wire Line
+	2300 6050 2300 6250
 Connection ~ 2300 6050
 Connection ~ 3800 6050
-Wire Wire Line
-	5950 1600 6150 1600
 Wire Wire Line
 	9850 1950 9850 2100
 Wire Wire Line
@@ -815,7 +805,9 @@ F 3 "" H 8800 5100 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	9650 5250 9650 5550
+	9650 5250 9650 5400
+Wire Wire Line
+	9650 5400 9650 5550
 Wire Wire Line
 	9750 5400 9650 5400
 Connection ~ 9650 5400
@@ -826,7 +818,9 @@ Wire Wire Line
 Wire Wire Line
 	8800 5250 8800 5750
 Wire Wire Line
-	7000 5750 8900 5750
+	7000 5750 8800 5750
+Wire Wire Line
+	8800 5750 8900 5750
 $Comp
 L GND #PWR27
 U 1 1 588FBE69
@@ -1030,4 +1024,14 @@ Wire Wire Line
 	10350 3000 10350 3150
 Wire Wire Line
 	10350 2700 10350 2550
+Wire Notes Line
+	5100 1200 5900 1200
+Wire Notes Line
+	5900 1200 5900 2150
+Wire Notes Line
+	5900 2150 5100 2150
+Wire Notes Line
+	5100 2150 5100 1200
+Text Notes 5350 1750 0    70   ~ 0
+Grove\nTouch\nSensor
 $EndSCHEMATC
